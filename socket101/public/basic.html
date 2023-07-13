@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="icon" type="image/x-icon" href="#">
+    <style>
+        body {
+            background-color: #000000;
+            color: white;
+        }
+    </style>
+</head>
+<h1>express server waiting</h1>
+
+<body>
+    <!-- socket is added by socket.io server -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io('http://localhost:3000');
+
+        socket.on('connection', () => {
+            console.log(socket.id);
+        });
+        socket.on('messageFromServer', (data) => {
+            console.log(data);
+            socket.emit('messageFromClient', {data: "hello from client browser"});
+        });
+    </script>
+</body>
+
+</html>
